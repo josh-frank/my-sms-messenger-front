@@ -1,0 +1,7 @@
+section {
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 1em;
+}
