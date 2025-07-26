@@ -1,7 +1,0 @@
-form {
-  display: flex;
-  flex-flow: column nowrap;
-  background: #dddd;
-  padding: 1em;
-  border-radius: 1em;
-}

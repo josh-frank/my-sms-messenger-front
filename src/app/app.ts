@@ -3,15 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MessageForm } from './message-form/message-form';
-import { MessageDisplay } from './message-display/message-display';
+import { Messages } from './messages/messages';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    MessageForm,
-    MessageDisplay,
+    Messages,
   ],
   providers: [
     CookieService,
@@ -33,4 +31,5 @@ export class App {
       this.getSessionIdFromCookies = uuid;
     }
   }
+
 }

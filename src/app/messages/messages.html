@@ -5,3 +5,11 @@
   <textarea name="content" formControlName="content"></textarea>
   <input type="submit" value="Send" />
 </form>
+<hr />
+<section>
+  @for ( message of messages; track message["_id"] ) {
+    <aside>to: {{ message["to"] }}</aside>
+    <aside>{{ message["content"] }}</aside>
+    <aside>sent at {{ message["created_at"] }}</aside>
+  }
+</section>
