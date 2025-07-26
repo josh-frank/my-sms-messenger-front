@@ -32,6 +32,5 @@ export class App {
       this.cookieService.set( 'session_id', uuid );
       this.getSessionIdFromCookies = uuid;
     }
-    // console.log( this.getSessionIdFromCookies );
   }
 }

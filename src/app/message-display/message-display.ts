@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
-interface MessageResponse { _id: string, to: string, content: string, session_id: string, created_at: string, updated_at: string, }
+import { MessageResponse } from '../message-response';
 
 @Component({
   selector: 'app-message-display',
@@ -34,7 +34,6 @@ export class MessageDisplay implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getSessionIdFromCookies = this.cookieService.get( 'session_id' );
     this.getMessages( this.cookieService.get( 'session_id' ) ).subscribe( data => {
       this.messages = data;
       // console.log( this.messages );

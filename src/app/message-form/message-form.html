@@ -1,7 +1,7 @@
-<form>
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
   <label for="to">phone #:&nbsp;</label>
-  <input name="to" />
+  <input name="to" formControlName="to" />
   <label for="content">message:&nbsp;</label>
-  <textarea name="content"></textarea>
+  <textarea name="content" formControlName="content"></textarea>
   <input type="submit" value="Send" />
 </form>
