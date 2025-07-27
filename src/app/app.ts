@@ -20,15 +20,15 @@ import { Messages } from './messages/messages';
 export class App {
   
   protected readonly title = signal('my-sms-messenger');
-  private getSessionIdFromCookies;
+  private getSessionId;
   private cookieService = inject(CookieService);
 
   constructor() {
-    this.getSessionIdFromCookies = this.cookieService.get( 'session_id' );
-    if ( !this.getSessionIdFromCookies ) {
+    this.getSessionId = this.cookieService.get( 'session_id' );
+    if ( !this.getSessionId ) {
       const uuid = uuidv4();
       this.cookieService.set( 'session_id', uuid );
-      this.getSessionIdFromCookies = uuid;
+      this.getSessionId = uuid;
     }
   }
 

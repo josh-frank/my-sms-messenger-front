@@ -1,8 +1,8 @@
 <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
   <label for="to">phone #:&nbsp;</label>
-  <input name="to" formControlName="to" />
+  <input name="to" formControlName="to" required />
   <label for="content">message:&nbsp;</label>
-  <textarea name="content" formControlName="content"></textarea>
+  <textarea name="content" formControlName="content" required></textarea>
   <input type="submit" value="Send" />
 </form>
 <hr />
@@ -11,5 +11,7 @@
     <aside>to: {{ message["to"] }}</aside>
     <aside>{{ message["content"] }}</aside>
     <aside>sent at {{ message["created_at"] }}</aside>
+  } @empty {
+    <aside>Enter a US phone number and message above and click Send</aside>
   }
 </section>

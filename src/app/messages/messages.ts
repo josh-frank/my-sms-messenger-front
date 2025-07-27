@@ -25,15 +25,19 @@ import { MessageResponse } from '../message-response';
     CommonModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    CookieService,
+  ],
   templateUrl: './messages.html',
   styleUrl: './messages.css'
 })
 export class Messages implements OnInit {
 
   private http = inject(HttpClient);
-  private cookieService = inject(CookieService);
   private apiUrl = 'http://104.237.150.105/messages';
+
+  private cookieService = inject(CookieService);
+  getSessionID = this.cookieService.get( 'session_id' );
 
   messages: MessageResponse[] = [];
 
@@ -42,12 +46,14 @@ export class Messages implements OnInit {
     content: new FormControl(''),
   });
 
+  // constructor() {}
+
   getMessages( session_id: string ): Observable<MessageResponse[]> {
-    return this.http.get<MessageResponse[]>(this.apiUrl, { params: { session_id } } );
+    return this.http.get<MessageResponse[]>( this.apiUrl, { params: { session_id } } );
   }
 
   sendMessage( session_id: string ): Observable<MessageResponse[]> {
-    return this.http.post<MessageResponse[]>(this.apiUrl, {
+    return this.http.post<MessageResponse[]>( this.apiUrl, {
       session_id,
       to: this.messageForm.value.to,
       content: this.messageForm.value.content,
@@ -59,16 +65,16 @@ export class Messages implements OnInit {
   }
 
   onSubmit(): void {
-    this.sendMessage( this.cookieService.get( 'session_id' ) ).subscribe( ( /* data */ ) => {
-      // console.log( data )
+    this.sendMessage( this.getSessionID ).subscribe( data => {
+      this.messages = data;
       window.alert( 'Message sent!' )
     } );
   }
 
   ngOnInit(): void {
-    this.getMessages( this.cookieService.get( 'session_id' ) ).subscribe( data => {
+    this.getMessages( this.getSessionID ).subscribe( data => {
       this.messages = data;
-      // console.log( this.messages );
+      console.log( 'this.messages loaded: ' + JSON.stringify( this.messages ) );
     } );
   }
 
