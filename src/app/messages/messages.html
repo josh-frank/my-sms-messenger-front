@@ -7,7 +7,7 @@
 </form>
 <hr />
 <section>
-  @for ( message of messages; track message["_id"] ) {
+  @for ( message of messages$ | async; track message["_id"] ) {
     <aside>to: {{ message["to"] }}</aside>
     <aside>{{ message["content"] }}</aside>
     <aside>sent at {{ message["created_at"] }}</aside>

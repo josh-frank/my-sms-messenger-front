@@ -39,7 +39,7 @@ export class Messages implements OnInit {
   private cookieService = inject(CookieService);
   getSessionID = this.cookieService.get( 'session_id' );
 
-  messages: MessageResponse[] = [];
+  messages$ = this.http.get<MessageResponse[]>( this.apiUrl, { params: { session_id: this.getSessionID } } );
 
   messageForm = new FormGroup({
     to: new FormControl(''),
@@ -65,17 +65,11 @@ export class Messages implements OnInit {
   }
 
   onSubmit(): void {
-    this.sendMessage( this.getSessionID ).subscribe( data => {
-      this.messages = data;
-      window.alert( 'Message sent!' )
-    } );
+    this.sendMessage( this.getSessionID ).subscribe( data => {}, error => {} );
   }
 
   ngOnInit(): void {
-    this.getMessages( this.getSessionID ).subscribe( data => {
-      this.messages = data;
-      console.log( 'this.messages loaded: ' + JSON.stringify( this.messages ) );
-    } );
+    this.getMessages( this.getSessionID ).subscribe( data => {}, error => {} );
   }
 
 }
