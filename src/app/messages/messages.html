@@ -8,10 +8,12 @@
 <hr />
 <section>
   @for ( message of messages$ | async; track message["_id"] ) {
-    <aside>to: {{ message["to"] }}</aside>
-    <aside>{{ message["content"] }}</aside>
-    <aside>sent at {{ message["created_at"] }}</aside>
+    <figure>
+      <small>to: {{ message["to"] }}</small>
+      <figcaption>{{ message["content"] }}</figcaption>
+      <small>sent at {{ message["created_at"] }}</small>
+    </figure>
   } @empty {
-    <aside>Enter a US phone number and message above and click Send</aside>
+    <figure>Loading…</figure>
   }
 </section>

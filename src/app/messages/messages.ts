@@ -65,11 +65,12 @@ export class Messages implements OnInit {
   }
 
   onSubmit(): void {
-    this.sendMessage( this.getSessionID ).subscribe( data => {}, error => {} );
+    this.messages$ = this.sendMessage( this.getSessionID );
+    window.alert( 'Message sent!' )
   }
 
   ngOnInit(): void {
-    this.getMessages( this.getSessionID ).subscribe( data => {}, error => {} );
+    this.getMessages( this.getSessionID );
   }
 
 }
